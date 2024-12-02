@@ -91,3 +91,18 @@ const predpoved = [
       "Neděle bude krásný slunečný den s teplotami mezi 18°C ráno a 26°C odpoledne. Nebude žádná oblačnost, a tak můžete očekávat celodenní slunečné počasí. Rychlost větru dosáhne 9 km/h a atmosférický tlak bude 1017 hPa.",
   },
 ];
+
+const mainElement = document.querySelector("#main");
+
+// nepovinné formátování data - vrací formát DD. MM. YYYY. Pro zájemce dokumentace k práci s objektem Date: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
+predpoved.forEach((day) => {
+  mainElement.innerHTML += `
+    <h1>${day.den}</h1>
+    <p>Datum: ${new Date(day.datum).toLocaleDateString()}</p>
+    <p>Denní teplota: ${day.denni_teplota} °C</p>
+    <p>Stav počasí: ${day.stav_pocasi}</p>
+    <a href="detail.html#${day.datum}">Detailní předpověď</a>
+    `;
+});
+
+// jako "id" pro url adresu jsem zvolila datum, protože je unikátní. Název dne je s diakritikou a to pro url adresu není nejvhodnější :-)

@@ -91,3 +91,22 @@ const predpoved = [
       "Neděle bude krásný slunečný den s teplotami mezi 18°C ráno a 26°C odpoledne. Nebude žádná oblačnost, a tak můžete očekávat celodenní slunečné počasí. Rychlost větru dosáhne 9 km/h a atmosférický tlak bude 1017 hPa.",
   },
 ];
+
+const mainElement = document.querySelector("#main");
+const dayId = window.location.hash.slice(1);
+const currentDay = predpoved.find((day) => day.datum === dayId);
+
+document.title = currentDay.den; // nepovinné - takto můžu upravit text na kartě prohlížeče
+
+mainElement.innerHTML += `
+  <h1>${currentDay.den}</h1>
+    <p>Datum: ${new Date(currentDay.datum).toLocaleDateString()}</p>
+    <p>Denní teplota: ${currentDay.denni_teplota} °C</p>
+    <p>Odpolední teplota: ${currentDay.odpoledni_teplota} °C</p>
+    <p>Večerní teplota: ${currentDay.vecerni_teplota} °C</p>
+    <p>Stav počasí: ${currentDay.stav_pocasi}</p>
+    <p>Tlak: ${currentDay.tlak} hPa</p>
+    <p>Rychlost větru: ${currentDay.rychlost_vetru} km/h</p>
+    <p>Popis počasí: ${currentDay.popis_pocasi}</p>
+    <a href="index.html">Zpět na přehled počasí</a>
+  `;
